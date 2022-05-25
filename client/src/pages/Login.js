@@ -2,26 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-    // const [formData, setFormData] = useState({
-    //     email: '',
-    //     password: '',
-    // });
-
-    // const [error, setError] = useState(null);
-
-    // const handleChange = (event) => {
-    //     const newFormData = { ...formData, [event.target.name]: event.target.value };
-    //     setFormData(newFormData);
-    // };
-
-    // const setTokenToLocalStorage = (token) => {
-    //     window.localStorage.setItem('token', token);
-    // }
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-
-    // }
 
     return (
         <div className='login-form card'>

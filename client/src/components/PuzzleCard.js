@@ -8,11 +8,8 @@ const PuzzledCard = () => {
             <Card.Img variant="top" src='https://api.time.com/wp-content/uploads/2019/03/kitten-report.jpg?quality=85&w=800' />
             <Card.Body>
                 <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary">Open Puzzle</Button>
+                <Card.Footer>Created by:</Card.Footer>
             </Card.Body>
             </Card>
     )
