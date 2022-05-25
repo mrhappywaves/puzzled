@@ -4,7 +4,9 @@
   "description": "React interactive puzzle app.",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/mrhappywaves/puzzled/issues"
   },
-  "homepage": "https://github.com/mrhappywaves/puzzled#readme"
+  "homepage": "https://github.com/mrhappywaves/puzzled#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
 }

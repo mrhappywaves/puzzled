@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose; 
 
 const puzzleSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true,
         trim: true,
     },
-    description: {
-        type: String ,
-    },
     difficulty: {
+        type: String,
+    },
+    img: {
         type: String,
     },
     createdBy: {
