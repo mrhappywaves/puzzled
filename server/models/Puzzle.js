@@ -13,6 +13,7 @@ const puzzleSchema = new Schema({
     },
     img: {
         type: String,
+        required: true,
     },
     createdBy: {
         type: Schema.Types.ObjectId,
