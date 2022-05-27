@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose; 
+const { Schema, model } = require('mongoose');
 
 const puzzleSchema = new Schema({
     title: {
@@ -25,6 +23,6 @@ const puzzleSchema = new Schema({
     }
 });
 
-const Puzzle = mongoose.model('Puzzle', puzzleSchema);
+const Puzzle = model('Puzzle', puzzleSchema);
 
-model.export = Puzzle;
+module.export = Puzzle;
