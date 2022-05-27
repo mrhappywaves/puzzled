@@ -1,7 +1,6 @@
 import React from 'react';
 import PuzzledCard from '../components/PuzzleCard';
 
-
 const Manage = () => {
 
     return (
@@ -12,8 +11,6 @@ const Manage = () => {
                 <div>{<PuzzledCard />}</div>
             </div>
         </div>
-
-        
     )
 };
 

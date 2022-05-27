@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PuzzledCard from '../components/PuzzleCard';
 const MainPage = () => {
-
 
     return (
         <>
@@ -28,14 +26,9 @@ const MainPage = () => {
                 <div className='card col-3'>{<PuzzledCard />}</div>
                 <div className='card col-3'>{<PuzzledCard />}</div>
                 <div className='card col-3'>{<PuzzledCard />}</div>             
-
             </div>
-          
-
         </div>
         </>
-
-
     );
 };
 
