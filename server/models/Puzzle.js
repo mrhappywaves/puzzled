@@ -7,22 +7,21 @@ const puzzleSchema = new Schema({
         trim: true,
     },
     difficulty: {
-        type: String,
+        type: Number,
+        required: false, 
     },
     img: {
-        type: String,
+        data: Buffer,
+        contentType: String,
+        required: false, 
     },
     createdBy: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true,
     },
-    puzzleID: {
-        type: String,
-        required: true,
-    }
 });
 
 const Puzzle = model('Puzzle', puzzleSchema);
 
-module.export = Puzzle;
+module.exports = Puzzle;

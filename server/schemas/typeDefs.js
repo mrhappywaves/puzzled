@@ -8,6 +8,14 @@ const typeDefs = gql`
     password: String
   }
 
+  type Puzzle {
+    _id: ID
+    createdBy: String
+    title: String
+    img: String
+    difficulty: Int
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -16,6 +24,8 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
+    puzzles: [Puzzle]
+    puzzle(img: String!, title: String!, difficulty: Int!): Puzzle
   }
 
   type Mutation {
