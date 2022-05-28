@@ -7,21 +7,19 @@ const puzzleSchema = new Schema({
         trim: true,
     },
     difficulty: {
-        type: String,
+        type: Number,
+        required: false, 
     },
     img: {
         data: Buffer,
-        contentType: String 
+        contentType: String,
+        required: false, 
     },
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    puzzleID: {
-        type: String,
-        required: true,
-    }
 });
 
 const Puzzle = model('Puzzle', puzzleSchema);
