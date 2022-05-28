@@ -84,6 +84,10 @@ code {
   margin: 30px;
 }
 
+.hero-title {
+  color: rgb(67, 14, 116);
+}
+
 .hero-btn {
   border-radius: 5px;
   border: none;
@@ -93,5 +97,36 @@ code {
   padding-left: 10px;
   padding-right: 10px;
   background-color: thistle;
-  
+
+}
+
+.hero-paragraph {
+  font-size: 35px;
+  color: rgb(44, 2, 44);
+}
+
+.row {
+  background-color: rgb(148, 195, 236);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.row button {
+  border: none;
+  border-radius: 3px;
+  padding: 3px;
+  font-size: 18px;
+  margin-top: 10px;
+  background-color: rgb(4, 111, 161);
+}
+
+.login-form {
+  border: none;
+}
+
+.btn btn-primary btn-lg {
+  padding: 10px;
+  width: 100px;
 }
