@@ -12,10 +12,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Home from './pages/Home';
+import Welcome from './pages/Welcome';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import MainPage from './pages/MainPage';
+import Home from './pages/Home';
 import Manage from "./pages/Manage";
 
 // Construct our main GraphQL API endpoint
@@ -49,10 +49,10 @@ class App extends Component {
         <Router>
           <Header />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/home' element={<MainPage />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/manage' element={<Manage />} />
           </Routes>
           <Footer />

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/header.css';
 // import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
@@ -7,7 +8,7 @@ const Header = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     return (
-        <div className='navbar navbar-expand-lg navbar-light bg-light'>
+        <div className='navbar navbar-expand-lg navbar-light'>
             <div className='navbar-brand'>
                 <Link className='navbar-brand' to='/'>
                     <img src='https://www.kindpng.com/picc/m/419-4193772_jigsaw-puzzles-set-computer-icons-transparent-puzzle-piece.png' className='d-inline-block logo' alt='logo' style={{height: '55px'}} />

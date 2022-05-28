@@ -1,0 +1,29 @@
+/* navbar */
+.navbar {
+    display: flex;
+}
+
+.navbar-brand {
+    display: block;
+    padding-left: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.nav-menu {
+    display: flex;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+.nav-item, 
+.nav-link {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    color: rosybrown;
+}
