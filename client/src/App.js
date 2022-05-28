@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MainPage from './pages/MainPage';
 import Manage from "./pages/Manage";
+import Puzzle from "./pages/Puzzle"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -42,6 +43,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// The code block below is a test code, remove it when the puzzle data is set up
+// eslint-disable-next-line
+const [data] = ([
+  {
+      title: "Some title here",
+      image: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Nyhavn_5-15%2C_Kbh_2020.jpg",
+      pieces: 3,
+  },
+]);
+
 class App extends Component {
   render() {
     return (
@@ -54,6 +65,7 @@ class App extends Component {
             <Route path='/signup' element={<Signup />} />
             <Route path='/home' element={<MainPage />} />
             <Route path='/manage' element={<Manage />} />
+            <Route path='/puzzle' element={<Puzzle data={data} />} />
           </Routes>
           <Footer />
         </Router>
