@@ -16,7 +16,7 @@ const puzzleSchema = new Schema({
         required: false, 
     },
     createdBy: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true,
     },
@@ -24,4 +24,4 @@ const puzzleSchema = new Schema({
 
 const Puzzle = model('Puzzle', puzzleSchema);
 
-module.export = Puzzle;
+module.exports = Puzzle;
