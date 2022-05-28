@@ -18,6 +18,14 @@ const typeDefs = gql`
     user(username: String!): User
   }
 
+  type Puzzle {
+    puzzleID: String
+    createdBy: String
+    title: String
+    img: String
+    difficulty: String
+  }
+
   type Mutation {
     signup(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
