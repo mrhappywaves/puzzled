@@ -1,0 +1,33 @@
+/* home */
+.welcome {
+    /* background-image: url(https://25.media.tumblr.com/e6684c17b371e29e4dcf32da1b9b020a/tumblr_mu0borXME11qbuesvo2_r1_1280.gif); */
+    /* background-image: url(https://www.projectescapeatl.com/wp-content/uploads/2019/08/puzzle.gif); */
+    /* background-image: url(https://cdn.dribbble.com/users/1070026/screenshots/3682352/fotl_taperedcrew_puzzle.gif); */
+    background-image: url(https://miro.medium.com/max/1400/1*hpsJv4BHaAHCjk997qxpIA.gif);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position:right;
+    padding: 20px;
+}
+.hero {
+    margin: 10em;
+    text-align: center;
+    color:rgb(94, 45, 136);
+}
+
+.hero-title {
+    font-size: 50px;
+    font-weight: bold;;
+    font-family: monospace;
+}
+
+.hero-paragraph {
+    font-size: 20px;
+    font-family: monospace;
+}
+
+.hero-btn {
+    justify-content:space-between;
+    font-family: monospace;
+    background-color:burlywood;
+}
