@@ -11,7 +11,7 @@ const Welcome = () => {
             
                     <p className='hero-paragraph'>No need to worry, you are in the right place, solving puzzles is what we do here. Are you willing to get Puzzled?</p>
 
-                    <Link className='btn hero-btn' to='/manage'>Get Puzzled </Link>
+                    <Link className='btn hero-btn' to='/home'>Get Puzzled</Link>
                 </div>
             </div> 
         </div>
