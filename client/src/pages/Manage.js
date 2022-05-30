@@ -1,39 +1,83 @@
-import React from 'react';
-import FilesUploadComponent from '../components/fileUpload';
-import PuzzledCard from '../components/PuzzleCard';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import Auth from '../utils/auth';
+
 
 const Manage = () => {
+    const [puzzleInfo, setPuzzleInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const { data } = await axios.get('/add-puzzle');
+                setPuzzleInfo(data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getData()
+    }, []);
+    console.log(puzzleInfo);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const { data } = await axios.get('/manage', 
+                {
+                    headers: { Authorization: `Bearer ${Auth.getToken()}` }
+                });
+                setUserInfo(data)
+            } catch (err) {
+                console.log(err);
+            };
+        }
+        getData()
+    }, []);
+    console.log(userInfo);
 
     return (
         <div>
             <div className='container'>
                 <div>
                     <h2 className='text-center'>Manage Puzzles</h2>
-                    <h3 className='text-center'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
-                </div>
-                
-                <div className='container border-outline'>
-                    {<PuzzledCard />}
-                </div>
-            </div>
-
-            <div className='row col-12'>
-                <div className='col-4'>
-                        <h3>Select an image to get puzzled</h3>
-                        {<FilesUploadComponent />}
-
                 </div>
 
-                <div className='col-4'>
-                    <h3>Create Puzzle</h3>
 
+                <div className='container-fluid createdItems'>
+                    {puzzleInfo.map(info => {
+                        return (
+                            <>
+                              {
+                                  info.owner.id = userInfo._id
+                                  ?
+                                  <div className='row'>
+                                      <div className='col'>
+                                          <Link 
+                                            className='linkToPuzzle' 
+                                            to={`/manage/${info._id}`}>
+                                                <Card style={{ width: '18rem' }}>
+                                                    <Card.Header as='h5' key={info.puzzle}>{info.puzzle}</Card.Header>
+                                                    <Card.Img height={200} variant='top' alt={info.puzzle} src={info.img} />
+                                                </Card>
+                                            </Link>
+                                      </div>
+                                  </div>
+                                  :
+                                  <div></div>
+                              }
+                            </>
+                        )
+                    })}
                 </div>
-                <div className='col-4'>
-                    <h3>Publish your new puzzle</h3>
-                    <button className='btn btn-primary'>Generate Puzzle</button>
+
+                <div className=''>
+                    <Link to='/addpuzzle' className='btn btn-primary'>Add Puzzle</Link>
                 </div>
-            </div>
-            
+
+            </div>       
         </div>
     )
 };

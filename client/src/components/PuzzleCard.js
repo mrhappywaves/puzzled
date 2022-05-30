@@ -17,7 +17,8 @@ const PuzzledCard = () => {
                 <Card.Img variant="top" src={card.image} />
                 <Card.Body>
                     <Card.Text>{card.title}</Card.Text>
-                    <Button variant="primary" to='/{card.puzzleId}'>Open Puzzle</Button>
+                    <Button variant="primary" to='/{card.puzzleId}'>Open</Button>
+                    <Button variant="primary" to='/{card.puzzleId}' style={{display: 'none'}} className='removeBtn'>Remove</Button>
                     <Card.Text>Created by:{card.createdBy}</Card.Text>
                 </Card.Body>
                 </Card>

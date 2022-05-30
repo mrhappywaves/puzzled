@@ -19,7 +19,35 @@ export const SIGNUP_USER = gql`
       user {
         _id
         username
+        email
       }
+    }
+  }
+`;
+
+export const ADD_PUZZLE = gql`
+  mutation addPuzzle($userId: ID!, $puzzle: String!){
+    addPuzlle(userId: $userId, puzzle: $puzzle) {
+      _id
+      username
+      puzzles {
+        _id
+        title
+        image
+        owner
+        difficulty
+      }
+    }
+  }
+`;
+
+export const REMOVE_PUZZLE = gql`
+  mutation removePuzzle($puzzleId: ID!) {
+    removePuzzle(puzzleId: $puzzleId) {
+      _id
+      username
+      email
+      puzzles
     }
   }
 `;

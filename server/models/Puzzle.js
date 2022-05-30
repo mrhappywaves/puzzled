@@ -11,8 +11,9 @@ const puzzleSchema = new Schema({
     },
     img: {
         type: String,
+        required: true,
     },
-    createdBy: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,

@@ -10,6 +10,19 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('username');
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findOne ({ _id: context.user._id }).select('-__v -password');
+        return user;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    puzzles: async () => {
+      return Puzzle.findAll();
+    },
+    puzzle: async (parent, { puzzleId }) => {
+      return Puzzle.findOne({ _id: puzzleId }).populate('owner');
+    }
   },
 
   Mutation: {
@@ -35,6 +48,31 @@ const resolvers = {
 
       return { token, user };
     },
+    addPuzzle: async (parent,{ puzzleData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { puzzle: puzzleData } },
+          { 
+            new: true,
+            runValidators: true,
+          }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError ('You need to be logged in!');
+    },
+    removePuzzle: async (parent, { puzzleId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { puzzle: puzzleId } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
   },
 };
 
