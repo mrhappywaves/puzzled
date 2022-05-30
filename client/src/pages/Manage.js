@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { FaBars } from "react-icons/fa";
+// import { FaBars } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
+// import { TbDeviceFloppy } from "react-icons/tb";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/manage.css";
 
@@ -33,13 +33,13 @@ const Manage = () => {
     ]);
 
     // Handle image change
-    const handleImageChange = (e, index) => {
-        const { name } = e.target;
-        const value = URL.createObjectURL(e.target.files[0]);
-        const list = [...inputList];
-        list[index][name] = value;
-        setInputList(list);
-    };
+    // const handleImageChange = (e, index) => {
+    //     const { name } = e.target;
+    //     const value = URL.createObjectURL(e.target.files[0]);
+    //     const list = [...inputList];
+    //     list[index][name] = value;
+    //     setInputList(list);
+    // };
 
     // Handle input change
     const handleInputChange = (e, index) => {
@@ -64,42 +64,23 @@ const Manage = () => {
         setInputList([...inputList, { image: "", text: "", id: uuidv4() }]);
     };
 
-    function handleOnDragEnd(result) {
-        if (!result.destination) return;
-
-        const items = Array.from(inputList);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-
-        setInputList(items);
-    }
-
     return (
         <div className="App">
             <div className="text-title">Manage Your Puzzles</div>
             <p>You can add a new puzzle or delete an old boring ones here:</p>
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable droppableId="items">
-                    {(provided) => (
+            {/* The unordered list below needs to be a form */}
                         <ul
                             className="items"
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
                             style={{ listStyle: "none" }}
                         >
                             {inputList.map((x, index) => {
                                 return (
-                                    <Draggable key={x.id} draggableId={x.id} index={index}>
-                                        {(provided) => (
                                             <li
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
                                                 className="list-item"
                                             >
                                                 <div className="item">
-                                                    <FaBars />
-                                                    <div className="img-content">
+                                                    {/* <FaBars /> */}
+                                                    {/* <div className="img-content">
                                                         <img className="manageImage" src={x.image} alt="" />
                                                         <input
                                                             name="image"
@@ -108,7 +89,15 @@ const Manage = () => {
                                                             className="img-input"
                                                             id="img-input"
                                                         />
-                                                    </div>
+                                                    </div> */}
+                                                    <input
+                                                        name="image"
+                                                        placeholder="Please paste image URL here"
+                                                        value={x.image}
+                                                        onChange={(e) => handleInputChange(e, index)}
+                                                        className="image input"
+                                                    />
+
                                                     <input
                                                         name="text"
                                                         placeholder="Please enter puzzle name"
@@ -134,9 +123,22 @@ const Manage = () => {
                                                     </select>
 
                                                     <div className="btn-box">
+                                                            <button
+                                                                className="button"
+                                                                // TODO: THIS is important - on Submit this needs to send (add) puzzle object to the database
+                                                                // TODO: onClick handle front end 
+                                                                // onClick={() => handleRemoveClick(index)}
+                                                            >
+                                                                <BsFillTrashFill />
+                                                                Add
+                                                            </button>
+                                                    </div>
+
+                                                    <div className="btn-box">
                                                         {inputList.length !== 1 && (
                                                             <button
                                                                 className="button"
+                                                                // TODO: THIS is important - update handle Remove click to delete the item from front end and database
                                                                 onClick={() => handleRemoveClick(index)}
                                                             >
                                                                 <BsFillTrashFill />
@@ -147,14 +149,8 @@ const Manage = () => {
                                                 </div>
                                             </li>
                                         )}
-                                    </Draggable>
-                                );
-                            })}
-                            {provided.placeholder}
+                            )}
                         </ul>
-                    )}
-                </Droppable>
-            </DragDropContext>
             <button
                 onClick={handleAddClick}
                 style={{ marginTop: "15px" }}
