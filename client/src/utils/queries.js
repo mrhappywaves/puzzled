@@ -19,3 +19,5 @@ export const QUERY_PUZZLE = gql`
     }
   }
 `;
+
+

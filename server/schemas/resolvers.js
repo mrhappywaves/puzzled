@@ -41,6 +41,18 @@ const resolvers = {
 
       return { token, user };
     },
+    addPuzzle: async (parent, { puzzleId, img, title, complexity }) => {
+      const puzzle = await Puzzle.create({ puzzleId, img, title, complexity });
+
+      return { puzzle };
+    },
+
+    removePuzzle: async (parent, args, context) => {
+      if (context.puzzle) {
+        return Puzzle.findOneAndDelete({ _id: context.puzzle._id });
+      }
+      throw new AuthenticationError('You need to be logged in first!');
+    }
   },
 };
 
