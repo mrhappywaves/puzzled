@@ -105,7 +105,7 @@ code {
   color: rgb(44, 2, 44);
 }
 
-.row {
+.container {
   background-color: rgb(148, 195, 236);
   border-radius: 5px;
   padding: 5px;
@@ -113,7 +113,7 @@ code {
   text-align: center;
 }
 
-.row button {
+.container button {
   border: none;
   border-radius: 3px;
   padding: 3px;
@@ -130,3 +130,18 @@ code {
   padding: 10px;
   width: 100px;
 }
+
+/* manage page */
+
+/*
+h2 {
+  text-align: center;
+  font-style: oblique;
+  color: rgb(137, 90, 181);
+  background-color: rgb(214, 184, 243);
+  margin-left: 30%;
+  margin-right: 30%;
+  padding: 5px;
+  border-radius: 5px;
+}
+*/
