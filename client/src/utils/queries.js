@@ -9,3 +9,13 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_PUZZLES = gql`
+  query getPuzzles {
+    puzzles {
+      _id
+      difficulty
+      img
+    }
+  }
+`;

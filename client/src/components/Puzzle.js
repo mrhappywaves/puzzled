@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { JigsawPuzzle } from "react-jigsaw-puzzle/lib";
 import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
 
 const Puzzle = ({ data }) => {
-  console.log(data.image);
-  useEffect(() => {
-    console.log(data.title);
-  });
 
   const currentTime = Date.now();
 
@@ -14,11 +10,11 @@ const Puzzle = ({ data }) => {
     <>
       <div onLoad={currentTime} className="puzzle-container">
         <JigsawPuzzle
-          imageSrc={data.image}
-          rows={!data.pieces ? 3 : data.pieces}
-          columns={!data.pieces ? 3 : data.pieces}
+          imageSrc={data.img}
+          rows={!data.difficulty ? 3 : data.difficulty}
+          columns={!data.difficulty ? 3 : data.difficulty}
           onSolved={() => alert(
-            // TODO: Need to get time on start. Then need to take out that time from the Date.now and divide by 1000 to get the time score
+            // TODO: Fix double alert 
             `You solved the puzzle in ${(Date.now() - currentTime) / 1000 / 60} minutes`
           )}
         />
