@@ -10,6 +10,12 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('username');
     },
+    puzzles: async () => {
+      return Puzzle.find(); 
+    },
+    puzzle: async (parent, args) => {
+      return await Puzzle.findById(args.id);
+    },
   },
 
   Mutation: {

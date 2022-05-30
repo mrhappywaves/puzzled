@@ -3,26 +3,23 @@ const { Schema, model } = require('mongoose');
 const puzzleSchema = new Schema({
     title: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
     },
     difficulty: {
-        type: String,
+        type: Number,
+        required: false, 
     },
     img: {
         type: String,
+        required: true,
     },
-    createdBy: {
+    author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
     },
-    puzzleID: {
-        type: String,
-        required: true,
-    }
 });
 
 const Puzzle = model('Puzzle', puzzleSchema);
 
-module.export = Puzzle;
+module.exports = Puzzle;
