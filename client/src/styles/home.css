@@ -1,3 +1,49 @@
-.manage-btn {
-    background-color: blanchedalmond;
+.App {
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+}
+
+.puzzle-container {
+    border: 1px solid #606060;
+    width: 65rem;
+    margin: 0 auto;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.bg-black {
+    background: #000;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.my-4 {
+    margin-top: 1rem;
+}
+
+.rounded {
+    border-radius: 0.5rem;
 }

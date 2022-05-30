@@ -31,3 +31,14 @@
     font-family: monospace;
     background-color:burlywood;
 }
+
+.hero-btn:hover {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 0px; 
+    font-size: 0em;
+    height: 40px;
+    width: inherit;
+    box-shadow: 2px 2px 4px #000000;
+    background-image:url(https://image.shutterstock.com/image-vector/puzzle-pattern-background-jigsaw-backdrop-260nw-1119381977.jpg)
+}
