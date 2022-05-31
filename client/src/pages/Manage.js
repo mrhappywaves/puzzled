@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { FaBars } from "react-icons/fa";
 import { BsFillTrashFill } from "react-icons/bs";
-// import { TbDeviceFloppy } from "react-icons/tb";
+import { BsFillPuzzleFill } from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/manage.css";
 
@@ -129,8 +129,8 @@ const Manage = () => {
                                                                 // TODO: onClick handle front end 
                                                                 // onClick={() => handleRemoveClick(index)}
                                                             >
-                                                                <BsFillTrashFill />
-                                                                Add
+                                                                <BsFillPuzzleFill />
+                                                                Save
                                                             </button>
                                                     </div>
 
