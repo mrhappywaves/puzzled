@@ -10,10 +10,10 @@ const typeDefs = gql`
 
   type Puzzle {
     _id: ID
+    createdBy: String
     title: String
-    difficulty: Int
     img: String
-    author: String
+    difficulty: Int
   }
 
   type Auth {
@@ -25,12 +25,14 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     puzzles: [Puzzle]
-    puzzle(id: ID!): Puzzle
+    puzzle(img: String!, title: String!, difficulty: Int!): Puzzle
   }
 
   type Mutation {
     signup(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addPuzzle(puzzleId: ID!, createdBy: String!, title: String!, img: String!, difficulty: Int!): Puzzle
+    removePuzzle: Puzzle
   }
 `;
 

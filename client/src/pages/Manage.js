@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 // import { FaBars } from "react-icons/fa";
-import { BsFillTrashFill } from "react-icons/bs";
+// import { BsFillTrashFill } from "react-icons/bs";
 // import { TbDeviceFloppy } from "react-icons/tb";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/manage.css";
+import { Navigate, useParams } from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries";
+import Auth from '../utils/auth';
 
 const Manage = () => {
     /* const [inputList, setInputList] = useState([{ image: "", text: "" }]); */
@@ -63,6 +67,28 @@ const Manage = () => {
     const handleAddClick = () => {
         setInputList([...inputList, { image: "", text: "", id: uuidv4() }]);
     };
+
+    const { username } = useParams();
+
+    const { loading, data } = useQuery(QUERY_USER);
+
+    const user = data || {};
+
+    if (Auth.isLoggedIn() && Auth.getUser().data._id === username) {
+        return <Navigate to="/manage"/>;
+    }
+
+    if (loading) {
+        return <div>Loading..</div>
+    }
+
+    if(!user.username) {
+        return (
+            <h4>
+                You need to be logged in first to see your puzzles!
+            </h4>
+        );
+    }
 
     return (
         <div className="App">
@@ -129,7 +155,7 @@ const Manage = () => {
                                                                 // TODO: onClick handle front end 
                                                                 // onClick={() => handleRemoveClick(index)}
                                                             >
-                                                                <BsFillTrashFill />
+                                                                {/* <BsFillTrashFill /> */}
                                                                 Add
                                                             </button>
                                                     </div>
@@ -141,7 +167,7 @@ const Manage = () => {
                                                                 // TODO: THIS is important - update handle Remove click to delete the item from front end and database
                                                                 onClick={() => handleRemoveClick(index)}
                                                             >
-                                                                <BsFillTrashFill />
+                                                                {/* <BsFillTrashFill /> */}
                                                                 Delete
                                                             </button>
                                                         )}

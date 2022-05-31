@@ -11,11 +11,11 @@ const resolvers = {
       return User.findOne({ username }).populate('username');
     },
     puzzles: async () => {
-      return Puzzle.find(); 
+      return Puzzle.find().populate(['puzzleId', 'img', 'title', 'complexity']); 
     },
-    puzzle: async (parent, args) => {
-      return await Puzzle.findById(args.id);
-    },
+    puzzle: async () => {
+      return Puzzle.findOne({ puzzleId }).populate(['img', 'title', 'complexity'])
+    }
   },
 
   Mutation: {
@@ -41,6 +41,18 @@ const resolvers = {
 
       return { token, user };
     },
+    addPuzzle: async (parent, { puzzleId, img, title, complexity }) => {
+      const puzzle = await Puzzle.create({ puzzleId, img, title, complexity });
+
+      return { puzzle };
+    },
+
+    removePuzzle: async (parent, args, context) => {
+      if (context.puzzle) {
+        return Puzzle.findOneAndDelete({ _id: context.puzzle._id });
+      }
+      throw new AuthenticationError('You need to be logged in first!');
+    }
   },
 };
 
