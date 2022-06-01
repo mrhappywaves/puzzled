@@ -4,37 +4,73 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { ADD_PUZZLE } from '../utils/mutations';
+import { QUERY_ME, QUERY_PUZZLES } from '../utils/queries';
+import Auth from '../utils/auth';
 
-const AddPuzle = () => {
+const PuzzleForm = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     const [puzzleState, setPuzzleState] = useState({
         title: '',
         img: '',
         difficulty: '',
     });
 
-    const [addPuzzle] = useMutation(ADD_PUZZLE);
+    const [addPuzzle] = useMutation(ADD_PUZZLE, {
+        update(cache, { data: { addPuzzle } }) {
+            try {
+                const { puzzles } = cache.readQuery({ query: QUERY_PUZZLES });
+
+                cache.writeQuery({
+                    query: QUERY_PUZZLES,
+                    data: { puzzles: [addPuzzle, ...puzzles] },
+                });
+            } catch (e) {
+                console.error(e);
+            }
+
+            const { me } = cache.readQuery({ query: QUERY_ME });
+            cache.writeQuery({
+                query: QUERY_ME,
+                data: { me: { ...me, puzzles: [...me.puzzles, addPuzzle] } },
+            });
+        },
+    });
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const { data } = await addPuzzle({
+                variables: {
+                    ...puzzleState,
+                    author: Auth.getUser().data.username,
+                }
+            });
+
+            setPuzzleState('');
+        } catch (err) {
+            console.error(err)
+        }
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setPuzzleState({
-            ...puzzleState,
-            [name]: value,
-        });
+        setPuzzleState(value);
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            console.log(puzzleState, 'before click');
-            await addPuzzle({ variables: { ...puzzleState } });
-            console.log(puzzleState, 'after click');
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     try {
+    //         console.log(puzzleState, 'before click');
+    //         await addPuzzle({ variables: { ...puzzleState } });
+    //         console.log(puzzleState, 'after click');
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 
 
 
@@ -56,7 +92,8 @@ const AddPuzle = () => {
                                 placehoder='puzzle name'
                                 autoFocus
                                 onChange={handleChange}
-                                value={setPuzzleState.title}
+                                value={puzzleState.title}
+                                className='form-input'
                             />
                         </Form.Group>
                         <Form.Label>Image Link:</Form.Label>
@@ -65,7 +102,8 @@ const AddPuzle = () => {
                                 as='textarea'
                                 onChange={handleChange}
                                 row={2}
-                                value={setPuzzleState.img}
+                                value={puzzleState.img}
+                                placehoder='URL'
                             />
                         </Form.Group>
                         <div>
@@ -79,12 +117,12 @@ const AddPuzle = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onclick={handleSubmit} type='submit'>Submit</Button>
+                    <Button type='submit' onClick={handleFormSubmit}>Submit</Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 };
 
-export default AddPuzle;
+export default PuzzleForm;
 

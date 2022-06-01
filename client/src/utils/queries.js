@@ -36,3 +36,20 @@ query Puzzle($puzzleId: ID!) {
   }
 }
 `;
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      puzzles {
+        _id
+        title
+        img
+        difficulty
+        author
+      }
+    }
+  }
+`;
