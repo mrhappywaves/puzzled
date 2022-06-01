@@ -8,14 +8,14 @@ const resolvers = {
       return User.find().populate('username');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('username');
+      return User.findOne({ username }).populate('puzzles');
     },
     puzzles: async () => {
       return Puzzle.find(); 
     },
-    puzzle: async (parent, args) => {
-      return await Puzzle.findById(args.id);
-    },
+    puzzle: async (parent, {_id}) => {
+      return Puzzle.findOne(_id).populate(['img', 'title', 'complexity'])
+    }
   },
 
   Mutation: {
@@ -40,6 +40,40 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addPuzzle: async (parent, { img, title, difficulty }, context) => {
+      if (context.user) {
+        const puzzle = await Puzzle.create({
+          img,
+          title,
+          difficulty,
+          author: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { puzzles: puzzle._id } }
+        );
+
+        return puzzle;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removePuzzle: async (parent, { puzzleId }, context) => {
+      if (context.user) {
+        const puzzle = await Puzzle.findOneAndDelete({
+          _id: puzzleId,
+          author: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { puzzles: puzzle._id } }
+        );
+
+        return puzzle;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

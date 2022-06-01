@@ -23,3 +23,28 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+export const ADD_PUZZLE = gql`
+  mutation AddPuzzle($title: String!, $img: String!, $difficulty: Int!) {
+    addPuzzle(title: $title, img: $img, difficulty: $difficulty) {
+      _id
+      author
+      img
+      difficulty
+      title
+    }
+  }
+`;
+
+export const REMOVE_PUZZLE = gql`
+  mutation RemovePuzzle($removePuzzleId: ID!) {
+    removePuzzle(id: $removePuzzleId) {
+      _id
+      title
+      difficulty
+      img
+      author
+    }
+  }
+`;
+
