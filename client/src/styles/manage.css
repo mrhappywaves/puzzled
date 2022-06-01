@@ -102,3 +102,15 @@ svg {
     max-width: 8rem;
     padding-left: unset;
 }
+
+.puzzleList {
+    display: grid;
+    justify-content: space-around;
+}
+
+.add-form-button {
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

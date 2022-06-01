@@ -22,7 +22,7 @@ const AddPuzle = () => {
         setPuzzleState({
             ...puzzleState,
             [name]: value,
-        });   
+        });
     };
 
     const handleSubmit = async (event) => {
@@ -40,7 +40,7 @@ const AddPuzle = () => {
 
     return (
         <>
-            <Button variant='primary' onClick={handleShow}>
+            <Button className='add-form-button' variant='primary' onClick={handleShow}>
                 Add Puzzle
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -50,22 +50,23 @@ const AddPuzle = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group className='mb-3' controlId='controlInput'>
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Title:</Form.Label>
                             <Form.Control
-                              type='text'
-                              placehoder='puzzle name'
-                              autoFocus
-                              onChange={handleChange}
-                              value={setPuzzleState.title}
+                                type='text'
+                                placehoder='puzzle name'
+                                autoFocus
+                                onChange={handleChange}
+                                value={setPuzzleState.title}
                             />
                         </Form.Group>
-                        <Form.Group className='mb-3'controlId='controlInput'>
-                            <Form.Control 
-                              as='textarea' 
-                              onChange={handleChange}
-                              row={2}
-                              value={setPuzzleState.img}
-                              />
+                        <Form.Label>Image Link:</Form.Label>
+                        <Form.Group className='mb-3' controlId='controlInput'>
+                            <Form.Control
+                                as='textarea'
+                                onChange={handleChange}
+                                row={2}
+                                value={setPuzzleState.img}
+                            />
                         </Form.Group>
                         <div>
                             <select name='Difficulty' onChange={handleChange} >
@@ -74,7 +75,7 @@ const AddPuzle = () => {
                                 <option value='4x4'>4x4</option>
                                 <option value='5x5'>5x5</option>
                             </select>
-                        </div> 
+                        </div>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
