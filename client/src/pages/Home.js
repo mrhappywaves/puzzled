@@ -7,6 +7,7 @@ import '../styles/home.css';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_PUZZLES);
+  console.log(data);
 
   return (
       <div className='App'>
