@@ -17,7 +17,7 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_PUZZLES = gql`
-  query getPuzzles {
+  query puzzles {
     puzzles {
       _id
       difficulty
@@ -27,7 +27,7 @@ export const QUERY_PUZZLES = gql`
 `;
 
 export const QUERY_PUZZLE = gql`
-query Puzzle($puzzleId: ID!) {
+query puzzle($puzzleId: ID!) {
   puzzle(id: $puzzleId) {
     _id
     title

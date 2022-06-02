@@ -15,7 +15,13 @@ const resolvers = {
     },
     puzzle: async (parent, {_id}) => {
       return Puzzle.findOne(_id).populate(['img', 'title', 'complexity'])
-    }
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('puzzles');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 
   Mutation: {

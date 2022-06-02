@@ -1,0 +1,17 @@
+.list-image {
+    object-fit: contain;
+    height: 300px;
+}
+
+/* .list-card {
+    display: flex;
+    justify-content: center;
+} */
+
+/* .card {
+    align-items: center;
+} */
+
+.puzzle-list {
+    justify-content: center;
+}

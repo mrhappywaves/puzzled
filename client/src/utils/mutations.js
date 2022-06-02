@@ -25,7 +25,7 @@ export const SIGNUP_USER = gql`
 `;
 
 export const ADD_PUZZLE = gql`
-  mutation AddPuzzle($title: String!, $img: String!, $difficulty: Int!) {
+  mutation addPuzzle($title: String!, $img: String!, $difficulty: Int!) {
     addPuzzle(title: $title, img: $img, difficulty: $difficulty) {
       _id
       author
@@ -37,7 +37,7 @@ export const ADD_PUZZLE = gql`
 `;
 
 export const REMOVE_PUZZLE = gql`
-  mutation RemovePuzzle($removePuzzleId: ID!) {
+  mutation removePuzzle($removePuzzleId: ID!) {
     removePuzzle(id: $removePuzzleId) {
       _id
       title

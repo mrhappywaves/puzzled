@@ -27,6 +27,7 @@ const typeDefs = gql`
     user(username: String!): User
     puzzles: [Puzzle]
     puzzle(id: ID!): Puzzle
+    me: User
   }
 
   type Mutation {
