@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/header.css';
 
-// TODO: Need to figure out hot to connect the reactstrap components to enable commented nav block below
-// import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
 import Auth from '../utils/auth';
 
 const Header = () => {

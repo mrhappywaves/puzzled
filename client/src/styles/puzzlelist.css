@@ -1,0 +1,13 @@
+.list-image {
+    object-fit: contain;
+    height: 300px;
+}
+
+.list-card {
+    margin-bottom: 1rem;
+}
+
+.puzzle-list {
+    justify-content: center;
+}
+

@@ -33,7 +33,7 @@ const typeDefs = gql`
     signup(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPuzzle(title: String!, img: String!, difficulty: Int!): Puzzle
-    removePuzzle(id: ID!): Puzzle
+    removePuzzle(_id: ID!): Puzzle
   }
 `;
 

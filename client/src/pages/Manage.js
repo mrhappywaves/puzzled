@@ -4,13 +4,14 @@ import { QUERY_USER } from '../utils/queries';
 import PuzzleList from "../components/PuzzleList";
 import Auth from '../utils/auth';
 import PuzzleForm from '../components/PuzzleForm';
+import { Navigate } from 'react-router-dom';
 import "../styles/manage.css";
 
-const Manage = ({ puzzles }) => {
-    if (!puzzles) {
-        console.log('No Puzzles');
+const Manage = () => {
+
+    if (!Auth.isLoggedIn()) {
+        return <Navigate to="/login" />;
     }
-    // const { username: userParam } = useParams();
 
     const username = Auth.getUser().data.username;
 
@@ -18,14 +19,6 @@ const Manage = ({ puzzles }) => {
         // pass URL parameter
         variables: { username: username }
     });
-
-
-    // const user = { data };
-
-    // const { loading, data } = useQuery(QUERY_USER);
-    console.log(data);
-
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -36,22 +29,8 @@ const Manage = ({ puzzles }) => {
             <div className="puzzleList">
                 <div className="text-title text-center">Manage Your Puzzles</div>
                 <p className="text-center">You can add a new puzzle or delete an old boring ones here:</p>
-
-                <div>
-                    {puzzles &&
-                        puzzles.map((puzzle) => (
-                            <div className="card mb-3">
-                                <div className="card-body">
-                                    <img alt="some_alt_text" src={puzzle.img} />
-                                </div>
-                                <div className="card-text">{puzzle.img}</div>
-                                <div className="btn" type='submit'>Delete</div>
-                            </div>
-                        ))}
-                </div>
-                {/* The unordered list below needs to be a form */}
-                < PuzzleList data={data} />
                 <PuzzleForm />
+                <PuzzleList data={data} />
             </div>
         </>
     );

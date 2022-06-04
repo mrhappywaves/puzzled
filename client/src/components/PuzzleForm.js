@@ -19,28 +19,32 @@ const AddPuzle = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        const parsedValue = name === 'difficulty' ? parseInt(value[0]) : value;
+        console.log(parsedValue)
         setPuzzleState({
             ...puzzleState,
-            [name]: value,
+            [name]: parsedValue,
         });
     };
 
     const handleSubmit = async (event) => {
+        // console.log(puzzleState)
         event.preventDefault();
+
         try {
-            console.log(puzzleState, 'before click');
             await addPuzzle({ variables: { ...puzzleState } });
-            console.log(puzzleState, 'after click');
         } catch (err) {
             console.error(err);
         }
+
+        handleClose();
+
+        window.location.reload();
     };
-
-
 
     return (
         <>
-            <Button className='add-form-button' variant='primary' onClick={handleShow}>
+            <Button className='add-form-button mb-5' variant='primary' onClick={handleShow}>
                 Add Puzzle
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -52,6 +56,7 @@ const AddPuzle = () => {
                         <Form.Group className='mb-3' controlId='controlInput'>
                             <Form.Label>Title:</Form.Label>
                             <Form.Control
+                                name='title'
                                 type='text'
                                 placehoder='puzzle name'
                                 autoFocus
@@ -62,6 +67,7 @@ const AddPuzle = () => {
                         <Form.Label>Image Link:</Form.Label>
                         <Form.Group className='mb-3' controlId='controlInput'>
                             <Form.Control
+                                name='img'
                                 as='textarea'
                                 onChange={handleChange}
                                 row={2}
@@ -69,7 +75,7 @@ const AddPuzle = () => {
                             />
                         </Form.Group>
                         <div>
-                            <select name='Difficulty' onChange={handleChange} >
+                            <select name='difficulty' defaultValue='2x2' onChange={handleChange} >
                                 <option value='2x2'>2x2</option>
                                 <option value='3x3'>3x3</option>
                                 <option value='4x4'>4x4</option>
@@ -79,7 +85,7 @@ const AddPuzle = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onclick={handleSubmit} type='submit'>Submit</Button>
+                    <Button onClick={handleSubmit} type='submit'>Submit</Button>
                 </Modal.Footer>
             </Modal>
         </>
@@ -87,4 +93,3 @@ const AddPuzle = () => {
 };
 
 export default AddPuzle;
-
