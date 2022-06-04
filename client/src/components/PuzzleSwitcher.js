@@ -21,12 +21,12 @@ const PuzzleSwitcher = ({ data }) => {
     <>
       {data.puzzles.map((item, index) => (
         <div className={location === index ? "block text-center" : "hidden"} key={index}>
-          <Puzzle data={item} />
           <div className="flex justify-center items-center my-4">
             <div className="bg-black text-white p-4 rounded h-min cursor-pointer" onClick={handlePreviousItem}>←</div>
             <div className="p-4">{`${index + 1} of ${data.puzzles.length}`}</div>
             <div className="bg-black text-white p-4 rounded h-min cursor-pointer" onClick={handleNextItem}>→</div>
           </div>
+          <Puzzle data={item} />
         </div>
       ))}
     </>

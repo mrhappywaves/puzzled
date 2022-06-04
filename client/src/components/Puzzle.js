@@ -4,18 +4,19 @@ import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
 
 const Puzzle = ({ data }) => {
 
-  const currentTime = Date.now();
+  // TODO: Make a timer option
+  // const currentTime = Date.now();
 
   return (
     <>
-      <div onLoad={currentTime} className="puzzle-container">
+      <div className="puzzle-container">
         <JigsawPuzzle
           imageSrc={data.img}
           rows={!data.difficulty ? 3 : data.difficulty}
           columns={!data.difficulty ? 3 : data.difficulty}
           onSolved={() => alert(
             // TODO: Fix double alert 
-            `You solved the puzzle in ${(Date.now() - currentTime) / 1000 / 60} minutes`
+            `YOU DID IT!`
           )}
         />
       </div>

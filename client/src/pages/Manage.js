@@ -4,10 +4,14 @@ import { QUERY_USER } from '../utils/queries';
 import PuzzleList from "../components/PuzzleList";
 import Auth from '../utils/auth';
 import PuzzleForm from '../components/PuzzleForm';
+import { Navigate } from 'react-router-dom';
 import "../styles/manage.css";
 
 const Manage = () => {
-    // const { username: userParam } = useParams();
+
+    if (!Auth.isLoggedIn()) {
+        return <Navigate to="/login" />;
+    }
 
     const username = Auth.getUser().data.username;
 

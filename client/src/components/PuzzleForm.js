@@ -28,16 +28,19 @@ const AddPuzle = () => {
     };
 
     const handleSubmit = async (event) => {
-        console.log(puzzleState)
+        // console.log(puzzleState)
         event.preventDefault();
+
         try {
             await addPuzzle({ variables: { ...puzzleState } });
         } catch (err) {
             console.error(err);
         }
+
+        handleClose();
+
+        window.location.reload();
     };
-
-
 
     return (
         <>
@@ -72,7 +75,7 @@ const AddPuzle = () => {
                             />
                         </Form.Group>
                         <div>
-                            <select name='difficulty' onChange={handleChange} >
+                            <select name='difficulty' defaultValue='2x2' onChange={handleChange} >
                                 <option value='2x2'>2x2</option>
                                 <option value='3x3'>3x3</option>
                                 <option value='4x4'>4x4</option>
