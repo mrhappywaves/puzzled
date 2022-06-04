@@ -38,8 +38,6 @@ const AddPuzle = () => {
         }
 
         handleClose();
-
-        window.location.reload();
     };
 
     return (
