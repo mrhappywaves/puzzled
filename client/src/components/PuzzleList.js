@@ -1,13 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
+import { REMOVE_PUZZLE } from "../utils/mutations";
 import "../styles/puzzlelist.css";
+import { useMutation } from "@apollo/client";
 
 const PuzzleList = ({ data }) => {
 
+    // ----------
+
+    // console.log(data.user.puzzles);
+
+    const [removePuzzle] = useMutation(REMOVE_PUZZLE)
+
+    const [inputList] = useState([data.user.puzzles]);
+
+    const puzzleArray = inputList[0];
+    // const puzzleArray = puzzlesArray[0];
+    console.log(puzzleArray);
+
     // Handle click event of the Remove button
-    const handleRemoveClick = (index) => {
-        console.log(index);
+    const handleRemoveClick = async (index) => {
+        // console.log(index);
+
+
+
+        // puzzleArray.splice();
+        // setInputList(puzzleArray);
+
+
+        const puzzleID = puzzleArray[index]._id; 
+        console.log(puzzleID);
+        try {
+            await removePuzzle({ variables: { puzzleID } });
+        } catch (err) {
+            console.error(err);
+        }
     };
+
+    // const [removePuzzle] = useMutation(REMOVE_PUZZLE);
+
+    // const handleClick = async (event) => {
+    //     event.preventDefault();
+
+    //     try {
+    //         await removePuzzle({ variables: { ...puzzleState } });
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
+
+    // ----------
 
     return (
         <>
@@ -15,7 +57,7 @@ const PuzzleList = ({ data }) => {
                 className="row puzzle-list mb-5"
                 style={{ listStyle: "none" }}
             >
-                {data.user.puzzles.map((x, index) => {
+                {puzzleArray.map((x, index) => {
                     return (
                         <li key={index} className="col-sm-4">
                             <div className="list-card">

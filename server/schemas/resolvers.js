@@ -11,17 +11,11 @@ const resolvers = {
       return User.findOne({ username }).populate('puzzles');
     },
     puzzles: async () => {
-      return Puzzle.find(); 
+      return Puzzle.find();
     },
     puzzle: async (parent, {_id}) => {
       return Puzzle.findOne(_id).populate(['img', 'title', 'complexity'])
-    },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('puzzles');
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    }
   },
 
   Mutation: {
@@ -49,11 +43,12 @@ const resolvers = {
     },
     addPuzzle: async (parent, { img, title, difficulty }, context) => {
       if (context.user) {
+        console.log(context.user)
         const puzzle = await Puzzle.create({
           img,
           title,
           difficulty,
-          author: context.user.username,
+          author: context.user._id,
         });
 
         await User.findOneAndUpdate(
@@ -65,11 +60,11 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removePuzzle: async (parent, { puzzleId }, context) => {
+    removePuzzle: async (parent, { _id }, context) => {
       if (context.user) {
+        console.log(context.user)
         const puzzle = await Puzzle.findOneAndDelete({
-          _id: puzzleId,
-          author: context.user.username,
+          _id: _id,
         });
 
         await User.findOneAndUpdate(

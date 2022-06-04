@@ -7,6 +7,7 @@ import PuzzleForm from '../components/PuzzleForm';
 import "../styles/manage.css";
 
 const Manage = () => {
+    // const { username: userParam } = useParams();
 
     const username = Auth.getUser().data.username;
 
@@ -23,9 +24,9 @@ const Manage = () => {
         <>
             <div className="puzzleList">
                 <div className="text-title text-center">Manage Your Puzzles</div>
-                <p className="text-center">You can add a new puzzle or delete old boring ones here:</p>
+                <p className="text-center">You can add a new puzzle or delete an old boring ones here:</p>
                 <PuzzleForm />
-                < PuzzleList data={ data } />
+                <PuzzleList data={data} />
             </div>
         </>
     );

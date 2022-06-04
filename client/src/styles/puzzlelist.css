@@ -3,15 +3,11 @@
     height: 300px;
 }
 
-/* .list-card {
-    display: flex;
-    justify-content: center;
-} */
-
-/* .card {
-    align-items: center;
-} */
+.list-card {
+    margin-bottom: 1rem;
+}
 
 .puzzle-list {
     justify-content: center;
 }
+

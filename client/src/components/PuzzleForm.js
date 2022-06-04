@@ -3,86 +3,45 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { BsFillPuzzleFill } from "react-icons/bs";
 import { ADD_PUZZLE } from '../utils/mutations';
-import { QUERY_PUZZLES, QUERY_ME } from '../utils/queries';
-import Auth from '../utils/auth';
 
-const PuzzleForm = () => {
-
+const AddPuzle = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     const [puzzleState, setPuzzleState] = useState({
         title: '',
         img: '',
-        difficulty: ''
+        difficulty: '',
     });
 
-    const [addPuzzle] = useMutation(ADD_PUZZLE, {
-        update(cache, { data: { addPuzzle } }) {
-            try {
-                const { puzzles } = cache.readQuery({ query: QUERY_PUZZLES });
-
-                cache.writeQuery({
-                    query: QUERY_PUZZLES,
-                    data: { puzzles: [addPuzzle, ...puzzles] },
-                });
-            } catch (e) {
-                console.error(e);
-            }
-
-            const { me } = cache.readQuery({ query: QUERY_ME });
-            
-            cache.writeQuery({
-                query: QUERY_ME,
-                data: { me: { ...me, puzzles: [...me.puzzles, addPuzzle] } },
-            });
-        },
-    });
-
-    // const [addPuzzle] = useMutation(ADD_PUZZLE); 
-
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const { data } = await addPuzzle({
-                variables: {
-                    img: puzzleState.img,
-                    title: puzzleState.title,
-                    difficulty: puzzleState.difficulty,
-                    author: Auth.getUser().data._id,
-                },
-            });
-            console.log(data);
-            setPuzzleState({
-                title: '',
-                img: '',
-                difficulty: '',
-            });
-        } catch (err) {
-            console.error(err)
-        }
-    };
+    const [addPuzzle] = useMutation(ADD_PUZZLE);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
+        const parsedValue = name === 'difficulty' ? parseInt(value[0]) : value;
+        console.log(parsedValue)
         setPuzzleState({
             ...puzzleState,
-            [name]: value,
+            [name]: parsedValue,
         });
-
-        console.log(Auth.getUser().data.username);
-        console.log(puzzleState.img);
     };
+
+    const handleSubmit = async (event) => {
+        console.log(puzzleState)
+        event.preventDefault();
+        try {
+            await addPuzzle({ variables: { ...puzzleState } });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
 
     return (
         <>
             <Button className='add-form-button mb-5' variant='primary' onClick={handleShow}>
-                <BsFillPuzzleFill />
                 Add Puzzle
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -90,46 +49,44 @@ const PuzzleForm = () => {
                     <Modal.Title>Add Puzzle</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleFormSubmit}>
-                        <Form.Label>Image Link:</Form.Label>
-                        <Form.Group className='mb-3' controlId='controlInput'>
-                            <Form.Control
-                                name="img"
-                                type='img'
-                                placehoder='Image URL'
-                                onChange={handleChange}
-                                value={puzzleState.img}
-                                row={2}
-                                as="textarea"
-                            />
-                        </Form.Group>
+                    <Form>
                         <Form.Group className='mb-3' controlId='controlInput'>
                             <Form.Label>Title:</Form.Label>
                             <Form.Control
-                                name="title"
-                                type='title'
-                                placehoder='Title'
+                                name='title'
+                                type='text'
+                                placehoder='puzzle name'
+                                autoFocus
                                 onChange={handleChange}
-                                value={puzzleState.title}
-                                className='form-input'
+                                value={setPuzzleState.title}
+                            />
+                        </Form.Group>
+                        <Form.Label>Image Link:</Form.Label>
+                        <Form.Group className='mb-3' controlId='controlInput'>
+                            <Form.Control
+                                name='img'
+                                as='textarea'
+                                onChange={handleChange}
+                                row={2}
+                                value={setPuzzleState.img}
                             />
                         </Form.Group>
                         <div>
-                            <select name='difficulty' type='difficulty' value={puzzleState.difficulty} onChange={handleChange} >
-                                <option value='2'>2x2</option>
-                                <option value='3'>3x3</option>
-                                <option value='4'>4x4</option>
-                                <option value='5'>5x5</option>
+                            <select name='difficulty' onChange={handleChange} >
+                                <option value='2x2'>2x2</option>
+                                <option value='3x3'>3x3</option>
+                                <option value='4x4'>4x4</option>
+                                <option value='5x5'>5x5</option>
                             </select>
                         </div>
-                        <hr></hr>
-                        <Button type='submit'>Submit</Button>
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleSubmit} type='submit'>Submit</Button>
+                </Modal.Footer>
             </Modal>
         </>
     );
 };
 
-export default PuzzleForm;
-
+export default AddPuzle;
